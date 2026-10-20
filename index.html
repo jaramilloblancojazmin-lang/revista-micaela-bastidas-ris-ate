@@ -7,7 +7,12 @@
 </style></head><body><main class="stage"><div class="page" id="page"><canvas id="canvas" aria-label="Revista digital Centro de Salud Micaela Bastidas con efecto de hojas"></canvas></div></main><button class="hit left" id="prev" aria-label="Página anterior"></button><button class="hit right" id="next" aria-label="Página siguiente"></button><div class="counter" id="counter">1 / 4</div><div class="hint" id="hint">Desliza para pasar las hojas ↔</div><nav class="controls" aria-label="Controles de revista"><button id="backBtn" aria-label="Página anterior">❮</button><span class="count" id="pageCount">1 / 4</span><button id="forwardBtn" aria-label="Página siguiente">❯</button><button id="fullBtn" aria-label="Pantalla completa" title="Pantalla completa">⛶</button><a href="revista-original.pdf" download aria-label="Descargar PDF" title="Descargar PDF" style="font-size:15px">PDF</a></nav>
 <script>
 (()=>{'use strict';
-const sources=['pagina-1.jpg','pagina-2.jpg','pagina-3.jpg','pagina-4.jpg'];const images=sources.map(src=>{let i=new Image();i.src=src;return i});
+const sources=[
+  './pagina-1.jpg',
+  './pagina-2.jpg',
+  './pagina-3.jpg',
+  './pagina-4.jpg'
+];
 const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d',{alpha:false}),holder=document.getElementById('page'),counter=document.getElementById('counter'),hint=document.getElementById('hint');let page=0,anim=null,drag=null,W=941,H=1672;
 function resize(){const r=holder.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(r.width*d);canvas.height=Math.round(r.height*d);W=canvas.width;H=canvas.height;draw()}window.addEventListener('resize',resize);
 function paint(i){if(images[i]&&images[i].complete&&images[i].naturalWidth)ctx.drawImage(images[i],0,0,W,H);else{ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H)}}
